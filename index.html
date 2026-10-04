@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff3f5">
+  <title>Forever, with you 💗</title>
+  <style>
+    :root { --rose:#db5576; --deep:#a83255; --ink:#563641; --paper:#fffdfb; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100svh; overflow-x:hidden; color:var(--ink); font-family: ui-rounded, "Segoe UI", system-ui, sans-serif; background:radial-gradient(ellipse at 50% 15%,#fff 0%,#fff6f7 42%,#ffe6eb 100%); }
+    button { font:inherit; }
+    .scene { min-height:100svh; display:grid; place-items:center; padding:28px 18px; position:relative; isolation:isolate; }
+    .glow { position:absolute; z-index:-1; width:min(78vw,520px); aspect-ratio:1; border-radius:50%; background:#ffdce5; filter:blur(65px); opacity:.55; }
+    .card { width:min(100%,550px); text-align:center; padding:clamp(28px,7vw,56px) clamp(20px,7vw,56px); background:rgba(255,255,255,.78); border:1px solid rgba(219,85,118,.15); border-radius:30px; box-shadow:0 24px 70px rgba(138,53,79,.12); backdrop-filter:blur(12px); animation:rise .8s cubic-bezier(.2,.8,.2,1) both; }
+    .eyebrow { color:var(--rose); font-size:.76rem; font-weight:800; letter-spacing:.19em; text-transform:uppercase; }
+    h1 { margin:13px 0 10px; font-family: Georgia,serif; font-size:clamp(2.3rem,9vw,4.05rem); line-height:1.05; letter-spacing:-.045em; color:var(--deep); }
+    .subtitle { margin:0 auto; max-width:35ch; color:#866872; line-height:1.65; }
+    .heart { display:block; font-size:2.4rem; margin-bottom:12px; animation:beat 1.4s ease-in-out infinite; }
+    .buttons { display:flex; justify-content:center; flex-wrap:wrap; gap:12px; margin-top:28px; }
+    .btn { min-width:132px; min-height:50px; border:0; border-radius:999px; padding:12px 25px; font-weight:800; cursor:pointer; transition:transform .18s ease, box-shadow .18s ease, background .18s ease; -webkit-tap-highlight-color:transparent; }
+    .btn:hover { transform:translateY(-2px); }
+    .btn:active { transform:scale(.97); }
+    .btn:focus-visible { outline:3px solid #8d3150; outline-offset:4px; }
+    .primary { color:#fff; background:linear-gradient(135deg,#e96e8b,#ce4169); box-shadow:0 9px 22px rgba(206,65,105,.24); }
+    .secondary { color:#a64e68; background:#fff0f3; border:1px solid #f3cbd5; }
+    .message { min-height:1.5em; margin:14px 0 0; color:var(--rose); font-weight:700; }
+    .letter { margin:26px auto 0; padding:clamp(20px,5vw,32px); text-align:left; background:var(--paper); border:1px solid #f5dbe1; border-radius:20px; box-shadow:0 10px 30px rgba(137,62,81,.08); font-family:Georgia,serif; font-size:1.08rem; line-height:1.8; }
+    .letter p { margin:0 0 14px; }
+    .letter p:last-child { margin-bottom:0; }
+    .signoff { color:var(--deep); font-weight:bold; }
+    .hidden { display:none !important; }
+    .final h1 { font-size:clamp(3rem,12vw,5.4rem); }
+    .final .heart { font-size:3.4rem; }
+    .sparkle { position:fixed; z-index:-1; pointer-events:none; opacity:.6; animation:drift 7s ease-in-out infinite; }
+    .s1 { top:12%; left:8%; font-size:24px; }.s2 { top:20%; right:9%; font-size:20px; animation-delay:-2s; }.s3 { bottom:13%; left:12%; font-size:19px; animation-delay:-4s; }.s4 { bottom:18%; right:10%; font-size:25px; animation-delay:-1s; }
+    .float-heart { position:fixed; bottom:-40px; z-index:5; pointer-events:none; animation:floatUp 3.4s ease-in forwards; }
+    @keyframes rise { from { opacity:0; transform:translateY(18px) scale(.98); } to { opacity:1; transform:translateY(0) scale(1); } }
+    @keyframes beat { 50% { transform:scale(1.13); } }
+    @keyframes drift { 50% { transform:translateY(-13px) rotate(8deg); } }
+    @keyframes floatUp { to { transform:translateY(-110vh) rotate(24deg); opacity:0; } }
+    @media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important; transition-duration:.01ms !important; } }
+  </style>
+</head>
+<body>
+  <span class="sparkle s1" aria-hidden="true">🌸</span><span class="sparkle s2" aria-hidden="true">💕</span>
+  <span class="sparkle s3" aria-hidden="true">🌷</span><span class="sparkle s4" aria-hidden="true">✨</span>
+  <main class="scene">
+    <div class="glow" aria-hidden="true"></div>
+    <section class="card" id="question" aria-labelledby="question-title">
+      <span class="heart" aria-hidden="true">💗</span>
+      <div class="eyebrow">A little question for my favorite person</div>
+      <h1 id="question-title">Will you be mine forever?</h1>
+      <p class="subtitle">Today is all about celebrating you—and the love that makes every day sweeter. 💌</p>
+      <div class="buttons">
+        <button class="btn primary" id="yes" type="button">Yes! 💖</button>
+        <button class="btn secondary" id="no" type="button">No 🙈</button>
+      </div>
+      <p class="message" id="try-again" aria-live="polite"></p>
+    </section>
+
+    <section class="card hidden" id="letter-screen" aria-labelledby="yes-title">
+      <span class="heart" aria-hidden="true">💞</span>
+      <div class="eyebrow">Boyfriend’s Day · My favorite yes</div>
+      <h1 id="yes-title">I knew you’d say yes! I love you so much 💖</h1>
+      <article class="letter">
+        <p>My love,</p>
+        <p>Every day with you feels like finding my favorite place in the whole world. You make me laugh, you make me feel safe, and you make even the ordinary moments feel magical.</p>
+        <p>Thank you for being you—for every smile, every hug, every little kiss, and all the love you give me. I’m so lucky to have you by my side, today and always.</p>
+        <p>Here’s to us, to all our little adventures, and to choosing each other forever. 💕</p>
+        <p class="signoff">All my love, always 💋🌷</p>
+      </article>
+      <div class="buttons"><button class="btn primary" id="end" type="button">One last thing… 💌</button></div>
+    </section>
+
+    <section class="card final hidden" id="final-screen" aria-labelledby="final-title">
+      <span class="heart" aria-hidden="true">💋</span>
+      <div class="eyebrow">Forever starts with you</div>
+      <h1 id="final-title">I LOVE YOU<br>ROSIE KE PAPA 💋</h1>
+      <p class="subtitle">Today, tomorrow, and every day after. 💗</p>
+    </section>
+  </main>
+  <script>
+    const question = document.querySelector('#question');
+    const letter = document.querySelector('#letter-screen');
+    const finalScreen = document.querySelector('#final-screen');
+    const tryAgain = document.querySelector('#try-again');
+
+    function hearts(count = 18) {
+      const icons = ['💗', '💖', '💕', '💘', '💋'];
+      for (let i = 0; i < count; i++) {
+        const heart = document.createElement('span');
+        heart.className = 'float-heart';
+        heart.textContent = icons[Math.floor(Math.random() * icons.length)];
+        heart.style.left = `${Math.random() * 100}%`;
+        heart.style.fontSize = `${16 + Math.random() * 19}px`;
+        heart.style.animationDelay = `${Math.random() * .9}s`;
+        document.body.appendChild(heart);
+        heart.addEventListener('animationend', () => heart.remove(), { once: true });
+      }
+    }
+
+    document.querySelector('#no').addEventListener('click', () => {
+      tryAgain.textContent = 'Try again 💕';
+      tryAgain.animate([{ opacity: 0, transform: 'translateY(4px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 260 });
+    });
+
+    document.querySelector('#yes').addEventListener('click', () => {
+      question.classList.add('hidden');
+      letter.classList.remove('hidden');
+      letter.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      hearts();
+    });
+
+    document.querySelector('#end').addEventListener('click', () => {
+      letter.classList.add('hidden');
+      finalScreen.classList.remove('hidden');
+      finalScreen.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      hearts(28);
+    });
+  </script>
+</body>
+</html>
+
